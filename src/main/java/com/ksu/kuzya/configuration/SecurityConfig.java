@@ -23,25 +23,22 @@ import java.util.List;
 public class SecurityConfig {
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return username -> {
-            User user = userRepository.findByUsername(username);
-            if (user != null) return user;
-            throw new UsernameNotFoundException("User with username " + username + " not found");
-        };
-    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/design", "/orders").hasRole("USER")
-                        .requestMatchers("/register").permitAll() // Явное разрешение
+                        .requestMatchers("/success").hasRole("USER")
+                        .requestMatchers("/success/admin").hasRole("ADMIN")
+                        .requestMatchers("/success/curier").hasRole("CURIER")
+                        .requestMatchers("/success/manager").hasRole("MANAGER")
+                        .requestMatchers("/success/collector.html").hasRole("COLLECTOR")
+                        .requestMatchers("/success/storage").hasRole("STORAGE")
+                        .requestMatchers("/register").permitAll()
                         .requestMatchers("/", "/**").permitAll()
                 )
                 .formLogin(form -> form
@@ -51,7 +48,10 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/")
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
                         .permitAll()
                 )
                 .csrf(csrf -> csrf

@@ -1,0 +1,28 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user_id-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Менеджер</title>
+</head>
+<body>
+    <h3>Создание задачи</h3>
+    <form method="POST" th:action="@{/success/manager}" id="registerForm" onsubmit="return validateForm();">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+        <label for="username">username сотрудника</label>
+        <input type="text" name="username" id="username" required/><br/>
+
+        <label for="name">название таски</label>
+        <input type="text" name="name" id="name" required/><br/>
+
+        <label for="description">описание</label>
+        <input type="text" name="description" id="description" required/><br/>
+
+        <input type="submit" value="выдать таску"/>
+    </form>
+</body>
+</html>

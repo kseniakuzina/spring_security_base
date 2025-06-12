@@ -1,0 +1,33 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user_id-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Админ</title>
+</head>
+<body>
+<h1>админ в отпуске</h1>
+<form action="/logout" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <button type="submit">Выйти</button>
+</form>
+<form action="/success/admin/allusers">
+    <input type="submit" value="посмотреть список всех пользователей" />
+</form>
+<form action="/success/admin/allroles">
+    <input type="submit" value="посмотреть список ролей" />
+</form>
+<form action="/success/admin/grantrole">
+    <input type="submit" value="выдать роль" />
+</form>
+<form action="/success/admin/addrole">
+    <input type="submit" value="создать роль" />
+</form>
+<form action="/success/admin/alluserswithroles">
+    <input type="submit" value="посмотреть список пользователей с ролями" />
+</form>
+</body>
+</html>

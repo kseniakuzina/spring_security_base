@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Users with Roles</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Users with Roles</h1>
+    <table class="table table-bordered mt-3">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pair : ${usernameswithroles}">
+            <td th:text="${pair.getFirst()}">Username</td>
+            <td th:text="${pair.getSecond()}">Role</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
